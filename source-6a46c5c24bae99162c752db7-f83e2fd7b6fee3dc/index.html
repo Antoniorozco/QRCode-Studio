@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>QR Studio — Branded QR Code Generator</title>
+<meta name="description" content="Generate custom branded QR codes with dots, rounded corners, and your color palette. Download as PNG, SVG, or EPS." />
+<link rel="preload" as="image" href="/viamericas-logo.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet" />
+<style>
+:root{--blue:#075ca6;--green:#5bb950;--blue-mid:#0e6bc2;--blue-light:#075ca614;--green-light:#5bb9501a;--surface:#f7f8fb;--surface-card:#fff;--border:#075ca61f;--text-primary:#0d1b2a;--text-secondary:#5a6a7e;--text-muted:#9aaab8;--shadow-sm:0 1px 3px #075ca614, 0 1px 2px #0000000a;--shadow-md:0 4px 16px #075ca61a, 0 2px 4px #0000000a;--shadow-lg:0 12px 40px #075ca624, 0 4px 12px #0000000f;--radius-card:20px;--radius-input:10px;--radius-btn:12px}*{box-sizing:border-box;margin:0;padding:0}body{background:var(--surface);color:var(--text-primary);-webkit-font-smoothing:antialiased;min-height:100vh;font-family:DM Sans,sans-serif}.qr-root{justify-content:center;align-items:flex-start;min-height:100vh;padding:40px 20px 60px;display:flex;position:relative;overflow:hidden}.orb{filter:blur(80px);pointer-events:none;z-index:0;border-radius:50%;position:fixed}.orb-1{background:radial-gradient(circle,#5bb95024,#0000 70%);width:500px;height:500px;animation:14s ease-in-out infinite orb-drift;top:-100px;right:-120px}.orb-2{background:radial-gradient(circle,#075ca61a,#0000 70%);width:600px;height:600px;animation:18s ease-in-out infinite reverse orb-drift;bottom:-200px;left:-150px}@keyframes orb-drift{0%,to{transform:translate(0)}50%{transform:translate(30px,-20px)}}.app-shell{z-index:1;width:100%;max-width:1060px;animation:.5s both fade-up;position:relative}@keyframes fade-up{0%{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}.app-header{align-items:center;gap:14px;margin-bottom:32px;display:flex}.brand-mark{box-shadow:var(--shadow-sm);border:1px solid var(--border);background:#fff;border-radius:14px;justify-content:center;align-items:center;padding:8px 12px;display:flex}.viamericas-logo{width:auto;height:36px;display:block}.app-title{color:var(--text-primary);letter-spacing:-.02em;font-family:Syne,sans-serif;font-size:1.75rem;font-weight:800;line-height:1}.app-subtitle{color:var(--text-muted);letter-spacing:.03em;text-transform:uppercase;margin-top:2px;font-size:.8rem;font-weight:400}.content-grid{grid-template-columns:380px 1fr;align-items:start;gap:20px;display:grid}@media(max-width:760px){.content-grid{grid-template-columns:1fr}}.panel{background:var(--surface-card);border-radius:var(--radius-card);border:1px solid var(--border);box-shadow:var(--shadow-md);padding:28px 24px}.control-panel{flex-direction:column;gap:22px;display:flex}.preview-panel{justify-content:center;align-items:center;min-height:420px;display:flex}.section-label{text-transform:uppercase;letter-spacing:.1em;color:var(--text-muted);font-size:.7rem;font-weight:600}.tab-toggle{background:var(--surface);border:1px solid var(--border);border-radius:12px;grid-template-columns:repeat(3,1fr);gap:4px;padding:4px;display:grid}.tab-btn{cursor:pointer;color:var(--text-secondary);background:0 0;border:none;border-radius:9px;padding:8px 12px;font-family:DM Sans,sans-serif;font-size:.85rem;font-weight:500;transition:all .2s}.tab-btn.active{background:var(--blue);color:#fff;box-shadow:0 2px 8px #075ca64d}.tab-btn:hover:not(.active){background:var(--blue-light);color:var(--blue)}.fields-area{min-height:80px}.field-group{flex-direction:column;gap:6px;display:flex}.vcard-grid{grid-template-columns:1fr 1fr;gap:12px;display:grid}.vcard-grid .field-group.full-width{grid-column:1/-1}.field-label{color:var(--text-secondary);letter-spacing:.02em;text-transform:uppercase;margin-bottom:2px;font-size:.75rem;font-weight:600}.field-label .req{color:var(--blue);margin-left:2px}.field-input{border:1.5px solid var(--border);border-radius:var(--radius-input);width:100%;color:var(--text-primary);background:var(--surface);outline:none;padding:10px 14px;font-family:DM Sans,sans-serif;font-size:.9rem;transition:border-color .2s,box-shadow .2s}.field-input::placeholder{color:var(--text-muted)}.field-input:focus{border-color:var(--blue);background:#fff;box-shadow:0 0 0 3px #075ca61a}.field-input.invalid{border-color:#e5484d;background:#fff5f5}.field-input.invalid:focus{box-shadow:0 0 0 3px #e5484d1f}.field-error{color:#c62a2f;font-size:.72rem;font-weight:500;min-height:1em;line-height:1.3}.bg-toggle-row{justify-content:space-between;align-items:center;gap:12px;display:flex}.bg-options{gap:8px;display:flex}.bg-opt{border:1.5px solid var(--border);cursor:pointer;color:var(--text-secondary);background:var(--surface);border-radius:8px;align-items:center;gap:7px;padding:7px 14px;font-family:DM Sans,sans-serif;font-size:.8rem;font-weight:500;transition:all .2s;display:flex}.bg-opt.selected{border-color:var(--blue);background:var(--blue-light);color:var(--blue)}.bg-swatch{border:1.5px solid #0000001a;border-radius:4px;flex-shrink:0;width:16px;height:16px;display:inline-block}.white-swatch{background:#fff}.transparent-swatch{background-color:#fff;background-image:linear-gradient(45deg,#ccc 25%,#0000 25%),linear-gradient(-45deg,#ccc 25%,#0000 25%),linear-gradient(45deg,#0000 75%,#ccc 75%),linear-gradient(-45deg,#0000 75%,#ccc 75%);background-position:0 0,0 3px,3px -3px,-3px 0;background-size:6px 6px}.generate-btn{border-radius:var(--radius-btn);cursor:pointer;letter-spacing:.01em;color:#fff;background:linear-gradient(135deg,var(--blue) 0%,var(--blue-mid) 100%);border:none;justify-content:center;align-items:center;gap:10px;width:100%;padding:14px 20px;font-family:Syne,sans-serif;font-size:.95rem;font-weight:700;transition:all .2s;display:flex;position:relative;overflow:hidden;box-shadow:0 4px 16px #075ca659}.generate-btn:before{content:"";background:linear-gradient(135deg,#ffffff1f,#0000);position:absolute;inset:0}.generate-btn:hover:not(.disabled){transform:translateY(-1px);box-shadow:0 6px 22px #075ca673}.generate-btn:active:not(.disabled){transform:translateY(0);box-shadow:0 2px 8px #075ca640}.generate-btn.disabled{opacity:.45;cursor:not-allowed}.empty-state{text-align:center;flex-direction:column;align-items:center;gap:10px;padding:40px 20px;display:flex}.empty-icon{margin-bottom:8px;animation:3s ease-in-out infinite pulse-icon}@keyframes pulse-icon{0%,to{opacity:.6;transform:scale(1)}50%{opacity:1;transform:scale(1.05)}}.empty-text{color:var(--text-secondary);font-family:Syne,sans-serif;font-size:1rem;font-weight:700}.empty-hint{color:var(--text-muted);font-size:.8rem}.qr-result{flex-direction:column;align-items:center;gap:24px;width:100%;animation:.4s cubic-bezier(.34,1.56,.64,1) both result-pop;display:flex}@keyframes result-pop{0%{opacity:0;transform:scale(.94)}to{opacity:1;transform:scale(1)}}.qr-preview-wrap{box-shadow:var(--shadow-lg);border-radius:16px;width:100%;max-width:300px;display:inline-block;overflow:hidden}.qr-preview-wrap.white-bg{background:#fff}.qr-preview-wrap.checker-bg{background-color:#fff;background-image:linear-gradient(45deg,#e8eaed 25%,#0000 25%),linear-gradient(-45deg,#e8eaed 25%,#0000 25%),linear-gradient(45deg,#0000 75%,#e8eaed 75%),linear-gradient(-45deg,#0000 75%,#e8eaed 75%);background-position:0 0,0 10px,10px -10px,-10px 0;background-size:20px 20px}.qr-canvas-holder{justify-content:center;align-items:center;display:flex}.qr-canvas-holder canvas,.qr-canvas-holder svg{display:block;width:100%!important;height:auto!important}.download-section{width:100%;max-width:360px}.download-label{text-transform:uppercase;letter-spacing:.1em;color:var(--text-muted);text-align:center;margin-bottom:10px;font-size:.7rem;font-weight:600}.download-btns{grid-template-columns:repeat(3,1fr);gap:10px;display:grid}.dl-btn{border:1.5px solid var(--border);cursor:pointer;background:var(--surface);border-radius:12px;flex-direction:column;align-items:center;gap:4px;padding:12px 10px;font-family:DM Sans,sans-serif;transition:all .2s;display:flex;position:relative;overflow:hidden}.dl-btn:before{content:"";opacity:0;transition:opacity .2s;position:absolute;inset:0}.dl-btn.png:before{background:linear-gradient(135deg,#075ca60f,#0000)}.dl-btn.svg:before{background:linear-gradient(135deg,#5bb9500f,#0000)}.dl-btn.eps:before{background:linear-gradient(135deg,#075ca60f,#0000)}.dl-btn:hover:before{opacity:1}.dl-btn:hover{box-shadow:var(--shadow-sm);transform:translateY(-2px)}.dl-btn.png{border-color:#075ca640}.dl-btn.svg{border-color:#5bb95059}.dl-btn.eps{border-color:#075ca640}.dl-btn:hover.png{border-color:var(--blue)}.dl-btn:hover.svg{border-color:var(--green)}.dl-btn:hover.eps{border-color:var(--blue)}.dl-ext{letter-spacing:.03em;color:var(--text-primary);font-family:Syne,sans-serif;font-size:1rem;font-weight:700}.dl-btn.svg .dl-ext{color:var(--green)}.dl-btn.png .dl-ext,.dl-btn.eps .dl-ext{color:var(--blue)}.dl-desc{color:var(--text-muted);text-align:center;font-size:.65rem;font-weight:400;line-height:1.2}.qr-meta{color:var(--text-muted);text-align:center;letter-spacing:.02em;font-size:.72rem}
+</style>
+</head>
+<body>
+<div class="qr-root">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="app-shell">
+    <header class="app-header">
+      <div class="brand-mark"><img src="/viamericas-logo.png" alt="Viamericas" class="viamericas-logo" /></div>
+      <div>
+        <h1 class="app-title">QR Studio</h1>
+        <p class="app-subtitle">Viamericas Branded QR Code Generator</p>
+      </div>
+    </header>
+    <div class="content-grid">
+      <div class="panel control-panel">
+        <div class="section-label">Code Type</div>
+        <div class="tab-toggle" id="tabToggle">
+          <button class="tab-btn active" data-type="url">URL</button>
+          <button class="tab-btn" data-type="phone">Phone</button>
+          <button class="tab-btn" data-type="vcard">vCard</button>
+        </div>
+        <div class="fields-area" id="fieldsArea"></div>
+
+        <div class="bg-toggle-row">
+          <span class="field-label" style="margin-bottom:0">Background</span>
+          <div class="bg-options" id="bgOptions">
+            <button class="bg-opt selected" data-bg="white" title="White background"><span class="bg-swatch white-swatch"></span>White</button>
+            <button class="bg-opt" data-bg="transparent" title="Transparent background"><span class="bg-swatch transparent-swatch"></span>Clear</button>
+          </div>
+        </div>
+
+        <div class="bg-toggle-row">
+          <span class="field-label" style="margin-bottom:0">Logo Viamericas</span>
+          <div class="bg-options" id="logoOptions">
+            <button class="bg-opt selected" data-logo="off" title="Sin logo">No</button>
+            <button class="bg-opt" data-logo="on" title="Incluir el logo de Viamericas en el centro">Sí incluir logo</button>
+          </div>
+        </div>
+
+        <button class="generate-btn disabled" id="generateBtn" disabled>
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3 3h5v5H3V3zm0 9h5v5H3v-5zm9-9h5v5h-5V3zm0 9h5v5h-5v-5z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"></path><rect x="5" y="5" width="1.5" height="1.5" fill="currentColor"></rect><rect x="5" y="14" width="1.5" height="1.5" fill="currentColor"></rect><rect x="14" y="5" width="1.5" height="1.5" fill="currentColor"></rect><rect x="13.5" y="13.5" width="3" height="3" fill="currentColor" opacity="0.5"></rect></svg>
+          Generate QR Code
+        </button>
+      </div>
+
+      <div class="panel preview-panel" id="previewPanel">
+        <div class="empty-state">
+          <div class="empty-icon">
+            <svg width="64" height="64" viewBox="0 0 64 64" fill="none"><rect x="4" y="4" width="22" height="22" rx="4" stroke="#075CA6" stroke-width="2" opacity="0.3"></rect><rect x="38" y="4" width="22" height="22" rx="4" stroke="#5BB950" stroke-width="2" opacity="0.3"></rect><rect x="4" y="38" width="22" height="22" rx="4" stroke="#5BB950" stroke-width="2" opacity="0.3"></rect><rect x="10" y="10" width="10" height="10" rx="2" fill="#075CA6" opacity="0.3"></rect><rect x="44" y="10" width="10" height="10" rx="2" fill="#5BB950" opacity="0.3"></rect><rect x="10" y="44" width="10" height="10" rx="2" fill="#5BB950" opacity="0.3"></rect><circle cx="44" cy="44" r="10" stroke="#075CA6" stroke-width="2" opacity="0.15" stroke-dasharray="4 2"></circle><path d="M40 44h8M44 40v8" stroke="#075CA6" stroke-width="2" stroke-linecap="round" opacity="0.3"></path></svg>
+          </div>
+          <p class="empty-text">Your QR code will appear here</p>
+          <p class="empty-hint">Fill in the fields and click Generate</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="/assets/qr-code-styling.js"></script>
+<script>
+(function () {
+  "use strict";
+
+  // --- Brand palette (baked into every QR, not shown as editable swatches) ---
+  var PALETTE = { bodyColor: "#075CA6", eyeFrameColor: "#5BB950", eyeBallColor: "#075CA6" };
+  var LOGO_SRC = "/viamericas-logo.png";
+
+  // --- State ---
+  var state = {
+    type: "url",                // url | phone | vcard
+    url: "",
+    phone: "",
+    vcard: { firstName: "", lastName: "", organization: "", position: "", phone: "", email: "" },
+    transparent: false,
+    includeLogo: false,
+    generated: false
+  };
+  var qr = null;
+  var lastData = "";
+
+  // --- DOM refs ---
+  var fieldsArea = document.getElementById("fieldsArea");
+  var previewPanel = document.getElementById("previewPanel");
+  var generateBtn = document.getElementById("generateBtn");
+
+  // ---------------------------------------------------------------------------
+  // Validation helpers
+  // ---------------------------------------------------------------------------
+  function validateUrl(raw) {
+    var v = (raw || "").trim();
+    if (!v) return { ok: false, msg: "Ingresa una URL." };
+    var candidate = /^[a-z][a-z0-9+.-]*:\/\//i.test(v) ? v : "https://" + v;
+    var u;
+    try { u = new URL(candidate); } catch (e) { return { ok: false, msg: "URL no válida." }; }
+    if (u.protocol !== "http:" && u.protocol !== "https:") return { ok: false, msg: "Usa http:// o https://" };
+    var host = u.hostname;
+    if (!host) return { ok: false, msg: "URL no válida." };
+    if (host !== "localhost") {
+      if (host.indexOf(".") === -1) return { ok: false, msg: "El dominio no es válido." };
+      var tld = host.split(".").pop();
+      if (!/^[a-z]{2,}$/i.test(tld)) return { ok: false, msg: "El dominio no es válido." };
+    }
+    return { ok: true, value: candidate };
+  }
+
+  function validatePhone(raw) {
+    var v = (raw || "").trim();
+    if (!v) return { ok: false, msg: "Ingresa un teléfono." };
+    if (!/^\+?[0-9\s().-]+$/.test(v)) return { ok: false, msg: "Solo dígitos, espacios y + ( ) - ." };
+    var digits = v.replace(/\D/g, "");
+    if (digits.length < 7 || digits.length > 15) return { ok: false, msg: "Debe tener entre 7 y 15 dígitos." };
+    return { ok: true, value: v };
+  }
+
+  function isValidEmail(v) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test((v || "").trim());
+  }
+
+  // Returns { ok, value?, errors:{field:msg} }
+  function validate() {
+    if (state.type === "url") {
+      var ru = validateUrl(state.url);
+      return ru.ok ? { ok: true, value: ru.value, errors: {} } : { ok: false, errors: { url: ru.msg } };
+    }
+    if (state.type === "phone") {
+      var rp = validatePhone(state.phone);
+      return rp.ok ? { ok: true, value: "tel:" + rp.value, errors: {} } : { ok: false, errors: { phone: rp.msg } };
+    }
+    // vCard: firstName, lastName y phone son obligatorios; el resto opcional.
+    var c = state.vcard, errors = {};
+    if (!c.firstName.trim()) errors.firstName = "Campo obligatorio.";
+    if (!c.lastName.trim()) errors.lastName = "Campo obligatorio.";
+    var vp = validatePhone(c.phone);
+    if (!vp.ok) errors.phone = vp.msg;
+    if (c.email.trim() && !isValidEmail(c.email)) errors.email = "Email no válido.";
+    if (Object.keys(errors).length) return { ok: false, errors: errors };
+    return { ok: true, value: buildVCard(c, vp.value), errors: {} };
+  }
+
+  function buildVCard(c, phoneValue) {
+    return [
+      "BEGIN:VCARD",
+      "VERSION:3.0",
+      "N:" + c.lastName + ";" + c.firstName,
+      "FN:" + c.firstName + " " + c.lastName,
+      c.organization ? "ORG:" + c.organization : "",
+      c.position ? "TITLE:" + c.position : "",
+      phoneValue ? "TEL:" + phoneValue : "",
+      c.email.trim() ? "EMAIL:" + c.email.trim() : "",
+      "END:VCARD"
+    ].filter(Boolean).join("\n");
+  }
+
+  // Minimal "required fields present" check to enable the button (format is
+  // enforced strictly on Generate).
+  function hasRequiredFields() {
+    if (state.type === "url") return state.url.trim() !== "";
+    if (state.type === "phone") return state.phone.trim() !== "";
+    var c = state.vcard;
+    return c.firstName.trim() !== "" && c.lastName.trim() !== "" && c.phone.trim() !== "";
+  }
+
+  // ---------------------------------------------------------------------------
+  // Field rendering
+  // ---------------------------------------------------------------------------
+  function fieldError(id) {
+    return '<div class="field-error" data-error-for="' + id + '"></div>';
+  }
+
+  function renderFields() {
+    var html = "";
+    if (state.type === "url") {
+      html =
+        '<div class="field-group">' +
+          '<label class="field-label">Website URL <span class="req">*</span></label>' +
+          '<input class="field-input" data-field="url" type="url" placeholder="https://example.com" value="' + esc(state.url) + '" />' +
+          fieldError("url") +
+        '</div>';
+    } else if (state.type === "phone") {
+      html =
+        '<div class="field-group">' +
+          '<label class="field-label">Phone Number <span class="req">*</span></label>' +
+          '<input class="field-input" data-field="phone" type="tel" placeholder="+1 555 000 0000" value="' + esc(state.phone) + '" />' +
+          fieldError("phone") +
+        '</div>';
+    } else {
+      var f = [
+        { key: "firstName", label: "First Name", placeholder: "Jane", req: true },
+        { key: "lastName", label: "Last Name", placeholder: "Smith", req: true },
+        { key: "organization", label: "Organization", placeholder: "Acme Corp", full: true },
+        { key: "position", label: "Position / Title", placeholder: "Product Designer", full: true },
+        { key: "phone", label: "Phone", placeholder: "+1 555 000 0000", req: true },
+        { key: "email", label: "Email", placeholder: "jane@acme.com" }
+      ];
+      html = '<div class="vcard-grid">' + f.map(function (x) {
+        return '<div class="field-group ' + (x.full ? "full-width" : "") + '">' +
+          '<label class="field-label">' + x.label + (x.req ? ' <span class="req">*</span>' : "") + '</label>' +
+          '<input class="field-input" data-field="vcard.' + x.key + '" placeholder="' + x.placeholder + '" value="' + esc(state.vcard[x.key]) + '" />' +
+          fieldError(x.key) +
+        '</div>';
+      }).join("") + '</div>';
+    }
+    fieldsArea.innerHTML = html;
+  }
+
+  function esc(s) {
+    return String(s).replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  }
+
+  function showErrors(errors) {
+    // clear
+    var all = fieldsArea.querySelectorAll(".field-error");
+    for (var i = 0; i < all.length; i++) all[i].textContent = "";
+    var inputs = fieldsArea.querySelectorAll(".field-input");
+    for (var j = 0; j < inputs.length; j++) inputs[j].classList.remove("invalid");
+    // apply
+    Object.keys(errors || {}).forEach(function (key) {
+      var box = fieldsArea.querySelector('[data-error-for="' + key + '"]');
+      if (box) box.textContent = errors[key];
+      var sel = state.type === "vcard" ? '[data-field="vcard.' + key + '"]' : '[data-field="' + key + '"]';
+      var input = fieldsArea.querySelector(sel);
+      if (input) input.classList.add("invalid");
+    });
+  }
+
+  function clearErrors() { showErrors({}); }
+
+  // ---------------------------------------------------------------------------
+  // QR building (faithful to the original palette + shapes)
+  // ---------------------------------------------------------------------------
+  function buildQr(data) {
+    var opts = {
+      width: 1000,
+      height: 1000,
+      type: "canvas",
+      data: data,
+      dotsOptions: { color: PALETTE.bodyColor, type: "dots" },
+      cornersSquareOptions: { color: PALETTE.eyeFrameColor, type: "extra-rounded" },
+      cornersDotOptions: { color: PALETTE.eyeBallColor, type: "dot" },
+      backgroundOptions: { color: state.transparent ? "transparent" : "#ffffff" },
+      qrOptions: { errorCorrectionLevel: "H" },
+      imageOptions: { crossOrigin: "anonymous", margin: 0 }
+    };
+    if (state.includeLogo) {
+      opts.image = LOGO_SRC;
+      // Small but legible logo centered on the code. High EC ("H") keeps it scannable.
+      opts.imageOptions = { crossOrigin: "anonymous", margin: 6, imageSize: 0.28, hideBackgroundDots: true };
+    }
+    return new QRCodeStyling(opts);
+  }
+
+  function svgToEps(svg) {
+    var doc = new DOMParser().parseFromString(svg, "image/svg+xml").querySelector("svg");
+    var w = (doc && doc.getAttribute("width")) || "1000";
+    var h = (doc && doc.getAttribute("height")) || "1000";
+    return "%!PS-Adobe-3.0 EPSF-3.0\n" +
+      "%%BoundingBox: 0 0 " + w + " " + h + "\n" +
+      "%%Title: QR Code\n" +
+      "%%Creator: QR Code Generator\n" +
+      "%%EndComments\n\n" +
+      "% Embedded SVG data (open in Illustrator or Inkscape for full fidelity)\n" +
+      "% " + svg.replace(/\n/g, "\n% ") + "\n\n" +
+      "%%EOF";
+  }
+
+  // ---------------------------------------------------------------------------
+  // Preview / result rendering
+  // ---------------------------------------------------------------------------
+  function renderResult() {
+    previewPanel.innerHTML =
+      '<div class="qr-result">' +
+        '<div class="qr-preview-wrap ' + (state.transparent ? "checker-bg" : "white-bg") + '">' +
+          '<div class="qr-canvas-holder" id="qrHolder"></div>' +
+        '</div>' +
+        '<div class="qr-meta">1000 × 1000 px  ·  Dots body  ·  Rounded corners' + (state.includeLogo ? "  ·  Logo" : "") + '</div>' +
+        '<div class="download-section">' +
+          '<div class="download-label">Download</div>' +
+          '<div class="download-btns">' +
+            '<button class="dl-btn png" id="dlPng"><span class="dl-ext">PNG</span><span class="dl-desc">High-res Raster</span></button>' +
+            '<button class="dl-btn svg" id="dlSvg"><span class="dl-ext">SVG</span><span class="dl-desc">Vector Web</span></button>' +
+            '<button class="dl-btn eps" id="dlEps"><span class="dl-ext">EPS</span><span class="dl-desc">Print Ready</span></button>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
+
+    var holder = document.getElementById("qrHolder");
+    holder.innerHTML = "";
+    qr.append(holder);
+
+    document.getElementById("dlPng").addEventListener("click", function () {
+      qr.download({ name: "qr-code", extension: "png" });
+    });
+    document.getElementById("dlSvg").addEventListener("click", function () {
+      qr.download({ name: "qr-code", extension: "svg" });
+    });
+    document.getElementById("dlEps").addEventListener("click", async function () {
+      var raw = await qr.getRawData("svg");
+      if (!raw) return;
+      var text = await raw.text();
+      var eps = svgToEps(text);
+      var a = document.createElement("a");
+      a.href = URL.createObjectURL(new Blob([eps], { type: "application/postscript" }));
+      a.download = "qr-code.eps";
+      a.click();
+      URL.revokeObjectURL(a.href);
+    });
+  }
+
+  function renderEmpty() {
+    previewPanel.innerHTML =
+      '<div class="empty-state">' +
+        '<div class="empty-icon">' +
+          '<svg width="64" height="64" viewBox="0 0 64 64" fill="none"><rect x="4" y="4" width="22" height="22" rx="4" stroke="#075CA6" stroke-width="2" opacity="0.3"></rect><rect x="38" y="4" width="22" height="22" rx="4" stroke="#5BB950" stroke-width="2" opacity="0.3"></rect><rect x="4" y="38" width="22" height="22" rx="4" stroke="#5BB950" stroke-width="2" opacity="0.3"></rect><rect x="10" y="10" width="10" height="10" rx="2" fill="#075CA6" opacity="0.3"></rect><rect x="44" y="10" width="10" height="10" rx="2" fill="#5BB950" opacity="0.3"></rect><rect x="10" y="44" width="10" height="10" rx="2" fill="#5BB950" opacity="0.3"></rect><circle cx="44" cy="44" r="10" stroke="#075CA6" stroke-width="2" opacity="0.15" stroke-dasharray="4 2"></circle><path d="M40 44h8M44 40v8" stroke="#075CA6" stroke-width="2" stroke-linecap="round" opacity="0.3"></path></svg>' +
+        '</div>' +
+        '<p class="empty-text">Your QR code will appear here</p>' +
+        '<p class="empty-hint">Fill in the fields and click Generate</p>' +
+      '</div>';
+  }
+
+  function generate() {
+    var res = validate();
+    if (!res.ok) {
+      showErrors(res.errors);
+      return;
+    }
+    clearErrors();
+    lastData = res.value;
+    qr = buildQr(lastData);
+    state.generated = true;
+    renderResult();
+  }
+
+  // Regenerate an already-shown code when background / logo options change,
+  // as long as the current input is still valid.
+  function regenerateIfShown() {
+    if (!state.generated) return;
+    var res = validate();
+    if (!res.ok) return;
+    lastData = res.value;
+    qr = buildQr(lastData);
+    renderResult();
+  }
+
+  function updateButton() {
+    var enabled = hasRequiredFields();
+    generateBtn.disabled = !enabled;
+    generateBtn.classList.toggle("disabled", !enabled);
+  }
+
+  // ---------------------------------------------------------------------------
+  // Wiring
+  // ---------------------------------------------------------------------------
+  document.getElementById("tabToggle").addEventListener("click", function (e) {
+    var btn = e.target.closest(".tab-btn");
+    if (!btn) return;
+    state.type = btn.getAttribute("data-type");
+    var all = this.querySelectorAll(".tab-btn");
+    for (var i = 0; i < all.length; i++) all[i].classList.toggle("active", all[i] === btn);
+    renderFields();
+    updateButton();
+  });
+
+  fieldsArea.addEventListener("input", function (e) {
+    var input = e.target.closest(".field-input");
+    if (!input) return;
+    var field = input.getAttribute("data-field");
+    if (field.indexOf("vcard.") === 0) {
+      state.vcard[field.slice(6)] = input.value;
+    } else {
+      state[field] = input.value;
+    }
+    // Clear the error on the field being edited.
+    input.classList.remove("invalid");
+    var key = field.indexOf("vcard.") === 0 ? field.slice(6) : field;
+    var box = fieldsArea.querySelector('[data-error-for="' + key + '"]');
+    if (box) box.textContent = "";
+    updateButton();
+  });
+
+  document.getElementById("bgOptions").addEventListener("click", function (e) {
+    var btn = e.target.closest(".bg-opt");
+    if (!btn) return;
+    state.transparent = btn.getAttribute("data-bg") === "transparent";
+    var all = this.querySelectorAll(".bg-opt");
+    for (var i = 0; i < all.length; i++) all[i].classList.toggle("selected", all[i] === btn);
+    regenerateIfShown();
+  });
+
+  document.getElementById("logoOptions").addEventListener("click", function (e) {
+    var btn = e.target.closest(".bg-opt");
+    if (!btn) return;
+    state.includeLogo = btn.getAttribute("data-logo") === "on";
+    var all = this.querySelectorAll(".bg-opt");
+    for (var i = 0; i < all.length; i++) all[i].classList.toggle("selected", all[i] === btn);
+    regenerateIfShown();
+  });
+
+  generateBtn.addEventListener("click", generate);
+
+  // Init
+  renderFields();
+  updateButton();
+})();
+</script>
+</body>
+</html>
