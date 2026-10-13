@@ -1,0 +1,3 @@
+[build]
+  # The QR Studio app lives in this folder of the repository.
+  publish = "source-6a46c5c24bae99162c752db7-f83e2fd7b6fee3dc"
